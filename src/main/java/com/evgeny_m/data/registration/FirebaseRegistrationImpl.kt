@@ -1,8 +1,11 @@
 package com.evgeny_m.data.registration
 
 import android.app.Activity
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.evgeny_m.data.repository.DataRepository
 import com.evgeny_m.data.room.UserDao
 import com.evgeny_m.domain.repository.FirebaseRegistration
 import com.google.firebase.FirebaseException
@@ -19,7 +22,8 @@ private var mutableCurrentUserId = MutableLiveData<String>()
 var currentUserId: LiveData<String> = mutableCurrentUserId
 
 
-class FirebaseRegistrationImpl(private val activity: Activity) : FirebaseRegistration {
+class FirebaseRegistrationImpl(private val application: Application) : FirebaseRegistration,
+    DataRepository {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -49,6 +53,7 @@ class FirebaseRegistrationImpl(private val activity: Activity) : FirebaseRegistr
             }
         }
 
+        val activity: Activity = application.baseContext as Activity
 
         val option = PhoneAuthOptions.newBuilder()
             .setPhoneNumber(phoneNumber)
@@ -72,5 +77,10 @@ class FirebaseRegistrationImpl(private val activity: Activity) : FirebaseRegistr
     override fun logOut() {
         auth.signOut()
         mutableCurrentUserId.value = null
+    }
+
+    override fun getUserId() : LiveData<String> {
+        mutableCurrentUserId.value = auth.currentUser?.uid.toString()
+        return currentUserId
     }
 }
