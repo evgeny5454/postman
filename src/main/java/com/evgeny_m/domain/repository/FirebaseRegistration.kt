@@ -5,4 +5,5 @@ interface FirebaseRegistration {
     fun registerUserByPhoneNumber(phoneNumber: String)
     fun enterSmsCode(code: String)
     fun logOut()
+
 }
