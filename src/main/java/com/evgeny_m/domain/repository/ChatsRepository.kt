@@ -4,5 +4,5 @@ import com.evgeny_m.domain.models.DomainChatModel
 
 interface ChatsRepository {
 
-    fun getChats() : List<DomainChatModel>
+    //fun getChats() : List<DomainChatModel>
 }

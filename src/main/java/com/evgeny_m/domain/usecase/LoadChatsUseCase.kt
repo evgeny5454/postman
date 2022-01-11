@@ -5,7 +5,7 @@ import com.evgeny_m.domain.repository.ChatsRepository
 
 class LoadChatsUseCase(private val userRepository: ChatsRepository) {
 
-    fun execute() : List<DomainChatModel>{
-        return userRepository.getChats()
-    }
+    //fun execute() : List<DomainChatModel>{
+        //return userRepository.getChats()
+   // }
 }
