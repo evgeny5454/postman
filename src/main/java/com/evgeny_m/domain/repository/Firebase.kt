@@ -17,6 +17,8 @@ interface Firebase {
     fun setOffline()
     fun foundUserDataById(userId: String)
     fun checkContacts(array: ArrayList<DomainDataContact>)
+    fun sendMessage(message: String, toUserId: String)
+    fun getMessagesList(userId: String)
     //fun getContacts() : List<DomainDataContact>
     //fun getUserData(list :List<DomainDataContact>)
 
